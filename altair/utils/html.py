@@ -9,11 +9,17 @@ HTML_TEMPLATE = jinja2.Template(
 <html>
 <head>
 {%- endif %}
-  <style>
-    .error {
-        color: red;
+<style>
+    #vis.vega-embed {
+      width: 100%;
+      display: flex;
     }
-  </style>
+
+    #vis.vega-embed details,
+    #vis.vega-embed summary {
+      position: relative;
+    }
+</style>
 {%- if not requirejs %}
   <script type="text/javascript" src="{{ base_url }}/vega@{{ vega_version }}"></script>
   {%- if mode == 'vega-lite' %}
@@ -60,7 +66,7 @@ requirejs.config({
       var embedOpt = {{ embed_options }};
 
       function showError(el, error){
-          el.innerHTML = ('<div class="error" style="color:red;">'
+          el.innerHTML = ('<div style="color:red;">'
                           + '<p>JavaScript Error: ' + error.message + '</p>'
                           + "<p>This usually means there's a typo in your chart specification. "
                           + "See the javascript console for the full traceback.</p>"
